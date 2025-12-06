@@ -2,10 +2,10 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional, List
-from app.db import init_db, SessionLocal
-from app.models import Complaint, ComplaintCreate, ComplaintRead, ComplaintStatusEnum
-from app.nlp import analyze_text
-from app.routing import ROUTING_TABLE, route_to_department
+from db import init_db, SessionLocal
+from models import Complaint, ComplaintCreate, ComplaintRead, ComplaintStatusEnum, ComplaintModel
+from nlp import analyze_text
+from routing import ROUTING_TABLE, route_to_department
 import threading
 import time
 import datetime
@@ -15,13 +15,13 @@ app = FastAPI(title="SGCRS Prototype API")
 # initialize DB (creates sqlite file)
 init_db()
 
-from app.models import ComplaintModel
-from app.seed_data import fake, analyze_text, route_to_department
+from models import ComplaintModel
+from seed_data import fake, analyze_text, route_to_department
 from sqlalchemy.orm import Session
 db = SessionLocal()
 count = db.query(ComplaintModel).count()
 if count == 0:
-    import app.seed_data  # auto-run seeder
+    import seed_data  # auto-run seeder
 db.close()
 
 

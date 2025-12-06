@@ -2,10 +2,10 @@
 from faker import Faker
 import random
 import datetime
-from app.db import SessionLocal, init_db
-from app.models import Complaint, ComplaintCreate
-from app.nlp import analyze_text
-from app.routing import route_to_department
+from db import SessionLocal, init_db
+from models import Complaint, ComplaintCreate
+from nlp import analyze_text
+from routing import route_to_department
 
 fake = Faker()
 init_db()
@@ -55,7 +55,7 @@ for i in range(100):
     )
 
     # manually use model to allow setting created_at and status
-    from app.models import ComplaintModel
+    from models import ComplaintModel
     c = ComplaintModel(
         citizen_name=citizen,
         text=text,

@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Enum, Text
 from sqlalchemy.orm import Session
 import enum
 import datetime
-from .db import Base
+from db import Base
 
 class ComplaintStatusEnum(str, enum.Enum):
     new = "new"
