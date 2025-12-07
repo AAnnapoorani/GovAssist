@@ -16,13 +16,14 @@ app = FastAPI(title="SGCRS Prototype API")
 init_db()
 
 from models import ComplaintModel
-from seed_data import fake, analyze_text, route_to_department
-from sqlalchemy.orm import Session
+# Auto-seed database with sample data only if empty
 db = SessionLocal()
-count = db.query(ComplaintModel).count()
+try:
+    count = db.query(ComplaintModel).count()
+finally:
+    db.close()
 if count == 0:
     import seed_data  # auto-run seeder
-db.close()
 
 
 # background escalator
