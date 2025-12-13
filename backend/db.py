@@ -12,5 +12,5 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 Base = declarative_base()
 
 def init_db():
-    from models import ComplaintModel
+    from app.models import ComplaintModel
     Base.metadata.create_all(bind=engine)

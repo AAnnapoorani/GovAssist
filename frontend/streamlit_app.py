@@ -74,8 +74,10 @@ def urgency_label(score):
         return "🟠 Medium"
     else:
         return "🟢 Low"
+
 # =========================================
 # UI LAYOUT
+# =========================================
 st.title("📊 Smart Grievance Classification & Routing Dashboard")
 st.caption("AI-powered monitoring panel for SGCRS system")
 
@@ -86,6 +88,7 @@ filter_status = st.sidebar.selectbox("Filter by Status", ["All", "in_progress", 
 
 # =========================================
 # FETCH DATA
+# =========================================
 df = fetch_complaints()
 
 if not df.empty:
@@ -99,10 +102,11 @@ if not df.empty:
     col1.metric("Total Complaints", len(df))
     col2.metric("In Progress", (df["status"] == "in_progress").sum())
     col3.metric("Resolved", (df["status"] == "resolved").sum())
-    col4.metric("SLA Breached", int(df["sla_breached"].sum()))
+    col4.metric("SLA Breached", df["sla_breached"].sum())
 
     # =========================================
     # URGENT ALERTS
+    # =========================================
     st.subheader("🚨 Urgent Complaints (Top 5)")
     urgent_cases = df.sort_values("urgency_score", ascending=False).head(5)
     if urgent_cases.empty:
@@ -125,8 +129,7 @@ if not df.empty:
                     <b>Created:</b> {row['created_at']}<br>
                     <b>SLA Deadline:</b> {row['sla_deadline']}
                 </div>
-                """,
-                unsafe_allow_html=True
+                """, unsafe_allow_html=True
             )
 
     # =========================================

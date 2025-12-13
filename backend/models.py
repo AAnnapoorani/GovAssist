@@ -1,11 +1,11 @@
 # backend/app/models.py
 from typing import Optional, List
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, DateTime, Enum, Text
 from sqlalchemy.orm import Session
 import enum
 import datetime
-from db import Base
+from .db import Base
 
 class ComplaintStatusEnum(str, enum.Enum):
     new = "new"
@@ -44,8 +44,9 @@ class ComplaintRead(BaseModel):
     reason: Optional[str]
     status: ComplaintStatusEnum
     created_at: datetime.datetime
-    # Pydantic v2: enable ORM mode
-    model_config = ConfigDict(from_attributes=True)
+
+    class Config:
+        orm_mode = True
 
 # Convenience DB methods
 class Complaint:

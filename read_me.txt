@@ -1,3 +1,4 @@
+@ -0,0 +1,19 @@
 cd backend
 python -m venv venv
 venv\Scripts\activate
