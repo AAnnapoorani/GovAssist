@@ -1,9 +1,11 @@
 fastapi==0.95.2
 uvicorn==0.22.0
-SQLAlchemy==2.0.41
-pydantic==1.10.12
-transformers==4.40.0  
-torch==2.2.0 
+sqlalchemy==2.0.41
+pydantic==2.0.0
 faker
-streamlit 
+requests
+pandas
+streamlit
 plotly
+transformers==4.40.0
+torch==2.2.0
