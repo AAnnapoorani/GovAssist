@@ -1,20 +1,21 @@
-# backend/app/nlp.py
+# backend/nlp.py
 from typing import Dict
 import re
 import os
 
-# Try to use a small HuggingFace model if internet available.
-# If not available, fallback to deterministic rule-based logic.
+# Try to use a small HuggingFace model only when explicitly enabled.
+# Default is rule-based to avoid heavy deps (torch/transformers) and NumPy 2.x ABI issues.
 USE_TRANSFORMER = False
-try:
-    from transformers import pipeline
-    # use a small model to reduce download time - change if necessary
-    classifier = pipeline("text-classification", model="distilbert-base-uncased-finetuned-sst-2-english")
-    USE_TRANSFORMER = True
-except Exception as e:
-    # no internet or transformers not installed, fallback
-    print("Transformer not available; using rule-based classifier. Reason:", e)
-    USE_TRANSFORMER = False
+if os.getenv("USE_TRANSFORMER", "0") == "1":
+    try:
+        from transformers import pipeline
+        # use a small model to reduce download time - change if necessary
+        classifier = pipeline("text-classification", model="distilbert-base-uncased-finetuned-sst-2-english")
+        USE_TRANSFORMER = True
+    except Exception as e:
+        # no internet or transformers not installed, fallback
+        print("Transformer not available; using rule-based classifier. Reason:", e)
+        USE_TRANSFORMER = False
 
 # Department keywords mapping (expand for your demo)
 DEPT_KEYWORDS = {

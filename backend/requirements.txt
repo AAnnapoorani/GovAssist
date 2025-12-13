@@ -4,3 +4,6 @@ SQLAlchemy==2.0.41
 pydantic==1.10.12
 transformers==4.40.0  
 torch==2.2.0 
+faker
+streamlit 
+plotly

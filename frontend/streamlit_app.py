@@ -141,7 +141,7 @@ if not df.empty:
         df.sort_values("created_at", ascending=False)[
             ["id", "citizen_name", "department", "Urgency Level", "status", "sla_breached", "created_at"]
         ],
-        use_container_width=True
+        width="stretch"
     )
 
     # =========================================
@@ -164,14 +164,14 @@ if not df.empty:
             x="department", y="id", title="Complaints per Department",
             color="department", text_auto=True
         )
-        st.plotly_chart(dept_fig, use_container_width=True)
+        st.plotly_chart(dept_fig, config={"responsive": True})
 
     with colB:
         status_fig = px.pie(
             df, names="status", title="Complaint Status Distribution",
             color_discrete_sequence=px.colors.qualitative.Pastel
         )
-        st.plotly_chart(status_fig, use_container_width=True)
+        st.plotly_chart(status_fig, config={"responsive": True})
 
     # =========================================
     # SLA BREACH ANALYSIS
@@ -184,7 +184,7 @@ if not df.empty:
         text_auto=True,
         color_discrete_map={True: "red", False: "green"}
     )
-    st.plotly_chart(sla_fig, use_container_width=True)
+    st.plotly_chart(sla_fig, config={"responsive": True})
 
 else:
     st.warning("⚠ No complaints found. Please seed or submit some via API.")

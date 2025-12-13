@@ -1,20 +1,36 @@
-@ -0,0 +1,19 @@
+To Create the python environment in the backend folder
+
+To setup the location
 cd backend
+
+Create the python environment
 python -m venv venv
+
+To activate the python environment
 venv\Scripts\activate
+
+To upgrade the pip packages
 pip install --upgrade pip
-# If you want the transformer pipeline and have internet, install all:
+
+TO download the requirements in the backend folder
 pip install -r requirements.txt
+
 # If you want faster install and avoid heavy libs:
 # remove transformers & torch from backend/requirements.txt then:
 # pip install fastapi uvicorn sqlalchemy pydantic faker streamlit plotly
 
+**For the Backend Running:**
 
-
+To set the backend path in command prompt:
 cd backend
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-# You should see "Escalator thread started." printed.
 
+To run the backend code:
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
+""For the Frontend Running:**
+
+To set the frontend path in command prompt:
 cd frontend
-streamlit run streamlit_app.py
+
+To run the Frontend code:
+python -m streamlit run streamlit_app.py
